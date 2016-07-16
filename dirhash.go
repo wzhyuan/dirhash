@@ -30,10 +30,10 @@ func main() {
 	pattern := flag.String("P", "(~*)123", "-P set skip  repexp")
 	logfile := flag.String("L", "/Users/wzhyuan/Downloads/doc/dirhash.log", "-L set logfile")
 	flag.Parse()
-	fmt.Println(*dpath, *pattern)
+       //	fmt.Println(*dpath, *pattern)
 	log, err := os.Create(*logfile)
 	if err != nil {
-		fmt.Println(logfile, err)
+	//	fmt.Println(logfile, err)
 		return
 	}
 	defer log.Close()
@@ -44,12 +44,12 @@ func main() {
 		}
 		//		fmt.Println(f)
 		if f.IsDir() {
-			fmt.Println("dir return")
+	//		fmt.Println("dir return")
 			return nil
 		}
 		reg, err := regexp.Compile(*pattern)
 		if err != nil {
-			fmt.Println(err)
+	//		fmt.Println(err)
 			return nil
 		}
 		matched := reg.MatchString(dpath)
