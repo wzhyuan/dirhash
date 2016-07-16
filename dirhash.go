@@ -21,7 +21,7 @@ func getSize(path string) int64 {
 	return fileSize
 }
 
-func getFilelist(path string, skip string, pattern string) {
+func getFilelist(path string, pattern string) {
 	err := filepath.Walk(path, func(path string, f os.FileInfo, err error) error {
 		if f == nil {
 			return err
@@ -29,9 +29,6 @@ func getFilelist(path string, skip string, pattern string) {
 		//		fmt.Println(f)
 		if f.IsDir() {
 			fmt.Println("dir return")
-			return nil
-		}
-		if path == skip {
 			return nil
 		}
 		reg, err := regexp.Compile(pattern)
@@ -67,13 +64,9 @@ func getFilelist(path string, skip string, pattern string) {
 }
 
 func main() {
-	dpath := flag.String("D", "/Users/wzhyuan/Downloads/doc/", "search path")
-	passpath := flag.String("P", "/Users/wzhyuan/Downloads/doc/", "pass path")
+	dpath := flag.String("D", "/Users/wzhyuan/Downloads/doc/", "-D set search path")
+	pattern := flag.String("P", "(~*)123", "-P set skip  repexp")
 	flag.Parse()
-	//root := flag.Arg(0)
-	//skip := flag.Arg(1)
-	//pattern := flag.Arg(2)
-	//fmt.Println(root, skip)
-	// fmt.Println(*passpath,*dpath)
-	//getFilelist(root, skip, pattern)
+	fmt.Println(*dpath, *pattern)
+	getFilelist(*dpath, *pattern)
 }
